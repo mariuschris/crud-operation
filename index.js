@@ -18,10 +18,10 @@ connect.then(() => {
 
 // Middleware
 app.use(express.json());
-
+app.use(express.urlencoded({extended: false}));
 // Routes
-app.use('/api/shopitems', shopItemRoute);
-app.use('/api/users', userRoute);
+app.use('/shopitems', shopItemRoute);
+app.use('/users', userRoute);
 
 // Start the server
 app.listen(port, () => {

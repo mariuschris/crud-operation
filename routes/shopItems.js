@@ -3,7 +3,7 @@ const router = express.Router();
 const ShopItem = require('../schemas/shopItemSchema');
 const {authenticateUser, isAdmin} = require("./middlewares");
 // Get a list of shop items
-router.get('/api/shopitems', authenticateUser, (req, res) => {
+router.get('/', authenticateUser, (req, res) => {
     ShopItem.find({}, (err, items) => {
       if (err) {
         return res.status(500).send(err);
@@ -13,7 +13,7 @@ router.get('/api/shopitems', authenticateUser, (req, res) => {
   });
   
   // Get a single shop item by ID
-  router.get('/api/shopitems/:id', authenticateUser, (req, res) => {
+  router.get('/:id', authenticateUser, (req, res) => {
     const itemId = req.params.id;
     ShopItem.findById(itemId, (err, item) => {
       if (err) {
@@ -27,7 +27,7 @@ router.get('/api/shopitems', authenticateUser, (req, res) => {
   });
   
   // Add a new shop item (only for admins)
-  router.post('/api/shopitems', authenticateUser, isAdmin, (req, res) => {
+  router.post('/', authenticateUser, isAdmin, (req, res) => {
     const newItem = new ShopItem(req.body);
     newItem.save((err) => {
       if (err) {
@@ -38,7 +38,7 @@ router.get('/api/shopitems', authenticateUser, (req, res) => {
   });
   
   // Edit a shop item (only for admins)
-  router.put('/api/shopitems/:id', authenticateUser, isAdmin, (req, res) => {
+  router.put('/:id', authenticateUser, isAdmin, (req, res) => {
     const itemId = req.params.id;
     ShopItem.findByIdAndUpdate(itemId, req.body, (err, item) => {
       if (err) {
@@ -52,7 +52,7 @@ router.get('/api/shopitems', authenticateUser, (req, res) => {
   });
   
   // Delete a shop item (only for admins)
-  router.delete('/api/shopitems/:id', authenticateUser, isAdmin, (req, res) => {
+  router.delete('/:id', authenticateUser, isAdmin, (req, res) => {
     const itemId = req.params.id;
     ShopItem.findByIdAndDelete(itemId, (err, item) => {
       if (err) {

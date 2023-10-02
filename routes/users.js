@@ -6,7 +6,7 @@ const User = require('../schemas/userSchema');
 require("dotenv").config();
 
 // User registration
-router.post('/api/users/register', async (req, res) => {
+router.post('/register', async (req, res) => {
     try {
       const { fullName, username, password, role } = req.body;
       const salt = bcrypt.genSaltSync(10);
@@ -20,7 +20,7 @@ router.post('/api/users/register', async (req, res) => {
   });
   
   // User login
-  router.post('/api/users/login', async (req, res) => {
+  router.post('/login', async (req, res) => {
     try {
       const { username, password } = req.body;
       const user = await User.findOne({ username });
