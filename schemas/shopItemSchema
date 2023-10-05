@@ -3,11 +3,12 @@ const mongoose = require('mongoose');
 const shopItemSchema = new mongoose.Schema({
   name: {
     type: String,
+    unique: true,
     required: true
 },
   description: {
     type: String,
-    required: true
+    
 },
   price: {
     type: Number,
@@ -16,6 +17,10 @@ const shopItemSchema = new mongoose.Schema({
   isInStock: {
     type: Boolean,
     default: false
+},
+user: {
+  type: mongoose.Schema.Types.ObjectId,
+  ref: "users"
 }
 }, {timestamps:true});
 
